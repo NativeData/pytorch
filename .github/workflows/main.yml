@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  repository_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: public.ecr.aws/h8s4b6a5/pytorch:latest
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Build
+      run: |
+        git submodule update --init --recursive --jobs 0
+        USE_BLAS=OpenBLAS USE_MKL=0 NO_MKL=1 python3 setup.py install
+        bash scripts/build_mobile.sh
+        bash scripts/build_android.sh
+        bash scripts/build_pytorch_android.sh
+    - name: Upload AAR
+      uses: actions/upload-artifact@v1
+      with:
+        name: pytorch-android-aar
+        path: android/pytorch_android_torchvision/build/outputs/aar/pytorch_android_torchvision-release.aar
