@@ -242,12 +242,16 @@ endif()
 
 # --- [ PocketFFT
 set(AT_POCKETFFT_ENABLED 0)
+message(STATUS "Checking PocketFFT")
 if(NOT MKL_FOUND)
+  message(STATUS "No MKL found. Looking for PocketFFT")
   find_path(POCKETFFT_INCLUDE_DIR NAMES pocketfft_hdronly.h
-            PATHS /usr/local/include
+            PATHS /usr/local/include/pocketfft
             PATHS $ENV{POCKETFFT_HOME}
            )
+  message(STATUS "PocketFFT search path: (${POCKETFFT_INCLUDE_DIR})")
   if(POCKETFFT_INCLUDE_DIR)
+    message(STATUS "PocketFFT found. Enabling.")
     set(AT_POCKETFFT_ENABLED 1)
   endif()
 endif()

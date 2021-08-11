@@ -378,20 +378,20 @@ ENDIF (MKL_LIBRARIES)
 # Final
 SET(CMAKE_LIBRARY_PATH ${saved_CMAKE_LIBRARY_PATH})
 SET(CMAKE_INCLUDE_PATH ${saved_CMAKE_INCLUDE_PATH})
-IF (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
-  SET(MKL_FOUND TRUE)
-ELSE (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
-  if (MKL_LIBRARIES AND NOT MKL_INCLUDE_DIR)
-    MESSAGE(WARNING "MKL libraries files are found, but MKL header files are \
-      not. You can get them by `conda install mkl-include` if using conda (if \
-      it is missing, run `conda upgrade -n root conda` first), and \
-      `pip install mkl-devel` if using pip. If build fails with header files \
-      available in the system, please make sure that CMake will search the \
-      directory containing them, e.g., by setting CMAKE_INCLUDE_PATH.")
-  endif()
-  SET(MKL_FOUND FALSE)
-  SET(MKL_VERSION)  # clear MKL_VERSION
-ENDIF (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
+#IF (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
+#  SET(MKL_FOUND TRUE)
+#ELSE (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
+#  if (MKL_LIBRARIES AND NOT MKL_INCLUDE_DIR)
+#    MESSAGE(WARNING "MKL libraries files are found, but MKL header files are \
+#      not. You can get them by `conda install mkl-include` if using conda (if \
+#      it is missing, run `conda upgrade -n root conda` first), and \
+#      `pip install mkl-devel` if using pip. If build fails with header files \
+#      available in the system, please make sure that CMake will search the \
+#      directory containing them, e.g., by setting CMAKE_INCLUDE_PATH.")
+#  endif()
+#  SET(MKL_FOUND FALSE)
+#  SET(MKL_VERSION)  # clear MKL_VERSION
+#ENDIF (MKL_LIBRARIES AND MKL_INCLUDE_DIR)
 
 # Standard termination
 IF(NOT MKL_FOUND AND MKL_FIND_REQUIRED)
