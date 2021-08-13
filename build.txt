@@ -1,0 +1,5 @@
+USE_BLAS=OpenBLAS USE_MKL=0 NO_MKL=1 python3 setup.py clean
+USE_BLAS=OpenBLAS USE_MKL=0 NO_MKL=1 python3 setup.py install
+bash scripts/build_mobile.sh
+bash scripts/build_android.sh
+bash scripts/build_pytorch_android.sh
