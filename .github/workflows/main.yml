@@ -12,11 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: 
-      image: public.ecr.aws/h8s4b6a5/pytorch:latest
+      image: public.ecr.aws/h8s4b6a5/pytorch:1.0.0
     timeout-minutes: 240
     steps:
     - uses: actions/checkout@v2
     - name: Run Build
+      env:
+        ANDROID_HOME: /opt/android-sdk
+        ANDROID_NDK: /opt/android-sdk/ndk/21.3.6528147
       run: |
         git submodule update --init --recursive --jobs 0
         USE_BLAS=OpenBLAS USE_MKL=0 NO_MKL=1 python3 setup.py install
