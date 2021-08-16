@@ -14,12 +14,18 @@ jobs:
     container: 
       image: public.ecr.aws/h8s4b6a5/pytorch:1.0.0
     timeout-minutes: 240
+    env:
+      ANDROID_HOME: /opt/android-sdk
+      ANDROID_NDK: /opt/android-sdk/ndk/21.3.6528147
     steps:
     - uses: actions/checkout@v2
+    - name: Pre-Flight
+      run: |
+        echo 'Android SDK Manager version'
+        $ANDROID_HOME/cmdline-tools/tools/bin/sdkmanager --version
+        echo 'Android NDK'
+        $ANDROID_NDK/build/ndk-build --version       
     - name: Run Build
-      env:
-        ANDROID_HOME: /opt/android-sdk
-        ANDROID_NDK: /opt/android-sdk/ndk/21.3.6528147
       run: |
         git submodule update --init --recursive --jobs 0
         USE_BLAS=OpenBLAS USE_MKL=0 NO_MKL=1 python3 setup.py install
