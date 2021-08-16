@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: public.ecr.aws/h8s4b6a5/pytorch:1.0.0
-    timeout-minutes: 240
+    timeout-minutes: 480
     env:
       ANDROID_HOME: /opt/android-sdk
       ANDROID_NDK: /opt/android-sdk/ndk/21.3.6528147
