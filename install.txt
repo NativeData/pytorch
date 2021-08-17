@@ -4,7 +4,7 @@ mv bazel.gpg /etc/apt/trusted.gpg.d/
 echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
 sudo apt update && sudo apt install -y bazel libopenblas-dev
 sudo mkdir -p /usr/local/include/pocketfft
-sudo docker/pocketfft_hdronly.h /usr/local/include/pocketfft
+sudo cp docker/pocketfft_hdronly.h /usr/local/include/pocketfft
 export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_NDK="$ANDROID_HOME/ndk/21.3.6528147" # Needs to be v21.x (bug in v22.x)
 
